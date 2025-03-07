@@ -6,7 +6,7 @@ import { motion } from 'framer-motion';
 import PageTransition from '@/components/PageTransition';
 import { toast } from 'sonner';
 
-// Predefined theme colors
+// Predefined theme colors - reduced to a minimal set
 const themeColors = [
   { name: 'Blue', value: '#3b82f6' },
   { name: 'Purple', value: '#8b5cf6' },
@@ -130,13 +130,13 @@ const ProfileSetup = () => {
                 />
 
                 <div className="mt-6">
-                  <label className="text-sm font-medium text-foreground mb-2 block">Choose theme color</label>
+                  <label className="text-sm font-medium text-foreground mb-2 block">Background color</label>
                   <div className="flex items-center space-x-3">
                     {themeColors.map((color) => (
                       <button
                         key={color.value}
                         onClick={() => updateThemeColor(color.value)}
-                        className={`w-8 h-8 rounded-full transition-all transform ${themeColor === color.value ? 'ring-2 ring-foreground scale-110' : 'hover:scale-105'}`}
+                        className={`w-6 h-6 rounded-full transition-all transform ${themeColor === color.value ? 'ring-2 ring-foreground scale-110' : 'hover:scale-105'}`}
                         style={{ backgroundColor: color.value }}
                         title={color.name}
                         aria-label={`Select ${color.name} theme`}
