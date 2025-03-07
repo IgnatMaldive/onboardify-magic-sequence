@@ -15,9 +15,28 @@ const themeColors = [
   { name: 'Green', value: '#10b981' },
 ];
 
+// Banner image options
+const bannerOptions = [
+  { name: 'Default', url: '' },
+  { name: 'Technology', url: 'https://images.unsplash.com/photo-1488590528505-98d2b5aba04b' },
+  { name: 'Circuit', url: 'https://images.unsplash.com/photo-1518770660439-4636190af475' },
+  { name: 'Code', url: 'https://images.unsplash.com/photo-1461749280684-dccba630e2f6' },
+  { name: 'Workspace', url: 'https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d' },
+];
+
 const ProfileSetup = () => {
   const navigate = useNavigate();
-  const { username, setUsername, profileDescription, setProfileDescription, themeColor, setThemeColor } = useUser();
+  const { 
+    username, 
+    setUsername, 
+    profileDescription, 
+    setProfileDescription, 
+    themeColor, 
+    setThemeColor,
+    bannerImage,
+    setBannerImage
+  } = useUser();
+  
   const [isLoading, setIsLoading] = useState(false);
   const [showNotification, setShowNotification] = useState(false);
 
@@ -47,6 +66,12 @@ const ProfileSetup = () => {
     document.documentElement.style.setProperty('--primary', color);
   };
 
+  // Set the banner image
+  const handleBannerSelect = (url: string) => {
+    setBannerImage(url);
+    toast.success('Banner updated');
+  };
+
   return (
     <PageTransition>
       <div className="min-h-screen flex items-center justify-center p-5">
@@ -60,7 +85,9 @@ const ProfileSetup = () => {
             <div 
               className="h-40 flex items-center justify-center relative overflow-hidden"
               style={{ 
-                background: `linear-gradient(to right, ${themeColor}10, ${themeColor}20)` 
+                background: bannerImage 
+                  ? `url(${bannerImage}) center/cover no-repeat` 
+                  : `linear-gradient(to right, ${themeColor}10, ${themeColor}20)`
               }}
             >
               <motion.div
@@ -130,7 +157,7 @@ const ProfileSetup = () => {
                 />
 
                 <div className="mt-6">
-                  <label className="text-sm font-medium text-foreground mb-2 block">Background color</label>
+                  <label className="text-sm font-medium text-foreground mb-2 block">Theme color</label>
                   <div className="flex items-center space-x-3">
                     {themeColors.map((color) => (
                       <button
@@ -141,6 +168,40 @@ const ProfileSetup = () => {
                         title={color.name}
                         aria-label={`Select ${color.name} theme`}
                       />
+                    ))}
+                  </div>
+                </div>
+
+                <div className="mt-4">
+                  <label className="text-sm font-medium text-foreground mb-2 block">Banner image</label>
+                  <div className="grid grid-cols-3 gap-2">
+                    {bannerOptions.map((banner) => (
+                      <button
+                        key={banner.name}
+                        onClick={() => handleBannerSelect(banner.url)}
+                        className={`h-16 rounded-md overflow-hidden transition-all ${bannerImage === banner.url ? 'ring-2 ring-primary' : 'hover:opacity-90'}`}
+                        title={banner.name}
+                        aria-label={`Select ${banner.name} banner`}
+                      >
+                        {banner.url ? (
+                          <img 
+                            src={banner.url} 
+                            alt={banner.name} 
+                            className="w-full h-full object-cover"
+                          />
+                        ) : (
+                          <div 
+                            className="w-full h-full flex items-center justify-center"
+                            style={{ 
+                              background: `linear-gradient(to right, ${themeColor}10, ${themeColor}20)` 
+                            }}
+                          >
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke={themeColor} strokeWidth="2">
+                              <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+                            </svg>
+                          </div>
+                        )}
+                      </button>
                     ))}
                   </div>
                 </div>

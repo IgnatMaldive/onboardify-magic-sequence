@@ -5,7 +5,7 @@ import PageTransition from '@/components/PageTransition';
 import { useEffect } from 'react';
 
 const Store = () => {
-  const { username, profileDescription, themeColor } = useUser();
+  const { username, profileDescription, themeColor, bannerImage } = useUser();
 
   // Apply theme color when component mounts
   useEffect(() => {
@@ -53,14 +53,18 @@ const Store = () => {
                 <div 
                   className="h-40 flex items-center justify-center"
                   style={{ 
-                    background: `linear-gradient(to right, ${themeColor}10, ${themeColor}20)` 
+                    background: bannerImage 
+                      ? `url(${bannerImage}) center/cover no-repeat` 
+                      : `linear-gradient(to right, ${themeColor}10, ${themeColor}20)` 
                   }}
                 >
-                  <svg className="w-10 h-10" style={{ color: `${themeColor}60` }} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                    <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
-                    <line x1="3" y1="3" x2="21" y2="21"></line>
-                    <line x1="21" y1="3" x2="3" y2="21"></line>
-                  </svg>
+                  {!bannerImage && (
+                    <svg className="w-10 h-10" style={{ color: `${themeColor}60` }} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                      <line x1="3" y1="3" x2="21" y2="21"></line>
+                      <line x1="21" y1="3" x2="3" y2="21"></line>
+                    </svg>
+                  )}
                 </div>
                 
                 <div className="p-6 pt-14 relative">
