@@ -20,7 +20,7 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
   const [profileDescription, setProfileDescription] = useState<string>(
     'Edit this profile description. En un país multicolor nació una abeja bajo el sol. Y fue famosa en el lugar, por su alegría y su bondad.'
   );
-  const [themeColor, setThemeColor] = useState<string>('#0f172a'); // Default dark blue
+  const [themeColor, setThemeColor] = useState<string>('#3b82f6'); // Default primary blue
 
   return (
     <UserContext.Provider
