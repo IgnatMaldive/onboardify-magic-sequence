@@ -8,8 +8,6 @@ interface UserContextType {
   setUsername: (username: string) => void;
   profileDescription: string;
   setProfileDescription: (profileDescription: string) => void;
-  themeColor: string;
-  setThemeColor: (themeColor: string) => void;
 }
 
 const UserContext = createContext<UserContextType | undefined>(undefined);
@@ -20,7 +18,6 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
   const [profileDescription, setProfileDescription] = useState<string>(
     'Edit this profile description. En un país multicolor nació una abeja bajo el sol. Y fue famosa en el lugar, por su alegría y su bondad.'
   );
-  const [themeColor, setThemeColor] = useState<string>('#3b82f6'); // Default primary blue
 
   return (
     <UserContext.Provider
@@ -30,9 +27,7 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
         username,
         setUsername,
         profileDescription,
-        setProfileDescription,
-        themeColor,
-        setThemeColor
+        setProfileDescription
       }}
     >
       {children}

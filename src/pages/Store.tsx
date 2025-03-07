@@ -2,20 +2,9 @@
 import { useUser } from '@/context/UserContext';
 import { motion } from 'framer-motion';
 import PageTransition from '@/components/PageTransition';
-import { useEffect } from 'react';
 
 const Store = () => {
-  const { username, profileDescription, themeColor } = useUser();
-
-  // Apply theme color when component mounts
-  useEffect(() => {
-    document.documentElement.style.setProperty('--primary', themeColor);
-    
-    // Clean up when component unmounts
-    return () => {
-      document.documentElement.style.setProperty('--primary', '#3b82f6'); // Reset to default
-    };
-  }, [themeColor]);
+  const { username, profileDescription } = useUser();
 
   // Animation variants
   const containerVariants = {
@@ -50,13 +39,8 @@ const Store = () => {
                   <small className="text-muted-foreground">Last login: Just now</small>
                 </div>
                 
-                <div 
-                  className="h-40 flex items-center justify-center"
-                  style={{ 
-                    background: `linear-gradient(to right, ${themeColor}10, ${themeColor}20)` 
-                  }}
-                >
-                  <svg className="w-10 h-10" style={{ color: `${themeColor}60` }} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <div className="h-40 bg-gradient-to-r from-primary/5 to-accent/5 flex items-center justify-center">
+                  <svg className="w-10 h-10 text-foreground/30" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                     <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
                     <line x1="3" y1="3" x2="21" y2="21"></line>
                     <line x1="21" y1="3" x2="3" y2="21"></line>
@@ -64,10 +48,7 @@ const Store = () => {
                 </div>
                 
                 <div className="p-6 pt-14 relative">
-                  <div 
-                    className="absolute -top-10 left-6 w-20 h-20 rounded-full border-4 border-card"
-                    style={{ backgroundColor: `${themeColor}30` }}
-                  ></div>
+                  <div className="absolute -top-10 left-6 w-20 h-20 rounded-full bg-primary/10 border-4 border-card"></div>
                   <div className="ml-16">
                     <h2 className="text-xl font-semibold">{username}'s NFT Emporium</h2>
                     <p className="text-muted-foreground mt-1">{profileDescription.substring(0, 60)}...</p>
@@ -87,15 +68,8 @@ const Store = () => {
                 {[1, 2, 3].map((item) => (
                   <motion.div 
                     key={item}
-                    className="aspect-square bg-card border border-border rounded-lg flex items-center justify-center transition-colors cursor-pointer"
-                    style={{ 
-                      borderColor: `${themeColor}30`,
-                      borderWidth: '1px'
-                    }}
-                    whileHover={{ 
-                      scale: 1.02,
-                      borderColor: `${themeColor}`,
-                    }}
+                    className="aspect-square bg-card border border-border rounded-lg flex items-center justify-center hover:border-primary/50 transition-colors cursor-pointer"
+                    whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
                   >
                     <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-foreground/30">
@@ -114,8 +88,7 @@ const Store = () => {
                 <p className="text-sm mb-3">Crypto Beats - NFT Anthem</p>
                 <div className="h-1 bg-muted rounded-full overflow-hidden">
                   <motion.div 
-                    className="h-full rounded-full" 
-                    style={{ backgroundColor: themeColor }}
+                    className="h-full bg-primary rounded-full" 
                     initial={{ width: "0%" }}
                     animate={{ width: "30%" }}
                     transition={{ duration: 0.8, delay: 0.5 }}
@@ -144,10 +117,7 @@ const Store = () => {
                     >
                       <div className="w-8 h-8 rounded-full bg-muted"></div>
                       <span className="text-sm">{friend}</span>
-                      <div 
-                        className="w-2 h-2 rounded-full ml-auto"
-                        style={{ backgroundColor: themeColor }}
-                      ></div>
+                      <div className="w-2 h-2 rounded-full bg-primary ml-auto"></div>
                     </motion.div>
                   ))}
                 </div>
