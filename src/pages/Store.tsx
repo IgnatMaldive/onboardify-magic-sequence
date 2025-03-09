@@ -3,6 +3,9 @@ import { useUser } from '@/context/UserContext';
 import { motion } from 'framer-motion';
 import PageTransition from '@/components/PageTransition';
 import { useEffect } from 'react';
+import { Settings } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { Button } from '@/components/ui/button';
 
 const Store = () => {
   const { username, profileDescription, themeColor, bannerImage } = useUser();
@@ -36,7 +39,23 @@ const Store = () => {
   return (
     <PageTransition>
       <div className="min-h-screen pb-12">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-8">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 relative">
+          {/* Customize Button */}
+          <div className="absolute top-2 right-4 sm:right-6 lg:right-8 z-10">
+            <Button 
+              asChild
+              variant="outline"
+              size="sm"
+              className="gap-1 bg-card border-border hover:bg-accent transition-all"
+              style={{ borderColor: `${themeColor}40` }}
+            >
+              <Link to="/profile-setup">
+                <Settings size={14} />
+                Customize
+              </Link>
+            </Button>
+          </div>
+          
           <motion.div 
             className="grid grid-cols-1 lg:grid-cols-4 gap-6"
             variants={containerVariants}
