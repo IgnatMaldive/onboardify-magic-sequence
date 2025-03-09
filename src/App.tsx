@@ -6,6 +6,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
 import { UserProvider } from "@/context/UserContext";
+import PageNavigation from "./components/PageNavigation";
 
 // Pages
 import SignUp from "./pages/SignUp";
@@ -22,6 +23,7 @@ const App = () => (
         <Toaster />
         <Sonner />
         <BrowserRouter>
+          <PageNavigation />
           <AnimatePresence mode="wait">
             <Routes>
               <Route path="/" element={<Navigate to="/signup" replace />} />
