@@ -26,6 +26,14 @@ const Store = () => {
   const [editedThemeColor, setEditedThemeColor] = useState(themeColor);
   const [editedBannerImage, setEditedBannerImage] = useState(bannerImage);
 
+  // Update local state when context values change
+  useEffect(() => {
+    setEditedUsername(username);
+    setEditedDescription(profileDescription);
+    setEditedThemeColor(themeColor);
+    setEditedBannerImage(bannerImage);
+  }, [username, profileDescription, themeColor, bannerImage]);
+
   // Apply theme color when component mounts or when customizing state changes
   useEffect(() => {
     document.documentElement.style.setProperty('--primary', isCustomizing ? editedThemeColor : themeColor);
